@@ -6,4 +6,7 @@ Department of Artificial Intelligence,<br>
 University Malaya, Malaysia <br>***
 
 ## Project Description
-Implementation of Continuous Authentication (CA) using Behavioural Biometric Recognition (BBR) 
+**Description** <br>
+Creating a Continuous Authentication System (CAS) using Behavioural Biometric Recognition (BBR) based on human-computer interaction and mouse dynamics.
+
+**Problem Statement**
