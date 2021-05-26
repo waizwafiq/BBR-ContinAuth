@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href='CSS/register.css'>
+    <title>BBR_ContinAuth</title>
+</head>
+
+<body>
+    <h1 style="text-align: center">Application Menu</h1>
+
+    <form action="action_page.php">
+        <div class="container">
+            <p>Please fill in this form to apply a job in this company.</p>
+            <hr>
+
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name (Just like in your ID Card)" name="name" id="name" required>
+            <br>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" id="email" required>
+            <br>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+            <br>
+            <label for="psw-repeat"><b>Confirm Password</b></label>
+            <input type="password" placeholder="Confirm Password" name="psw-repeat" id="psw-repeat" required>
+            <br>
+            <label for="ans1"><b>Why do you want to join this company? (Minimum 100 words)</b></label>
+            <textarea id="ans1" name="ans1" placeholder="Write something.." style="height:200px"></textarea>
+            <br>
+            <label for="ans2"><b>How can you contribute to this company? (Minimum 150 words)</b></label>
+            <textarea id="ans2" name="ans2" placeholder="Write something.." style="height:200px"></textarea>
+
+            <hr>
+            <br>
+            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+            <button type="submit" class="registerbtn">Register</button>
+            <button type="button" onclick="javascript:history.back()" class="backbtn">Back</button>
+        </div>
+
+        <div class="container signin">
+            <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+        </div>
+    </form>
+    <!-- <h1>Features are being recorded <u>ALL THE TIME</u></h1>
+    <h3>This is just a dummy text.</h3>
+    <button id="dwCSV">Download CSV</button>
+    <script src="obtainfeatures.js"></script> -->
+    <button id="dwCSV">Download CSV</button>
+    <script src="obtainfeatures.js"></script>
+</body>
+
+</html>
