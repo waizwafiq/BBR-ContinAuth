@@ -8,7 +8,7 @@ function downloadCSV(rows) {
 
 let sampleEle = document.querySelector(".sample");
 
-let features = []; //C: mouse coordinates
+let features = [["x","y"]]; //list the features name here
 document.body.addEventListener("mousemove", (event) => {
     let instantFeats = []; //the instantaneous features arraylist
 
