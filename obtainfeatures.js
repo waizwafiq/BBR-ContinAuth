@@ -6,13 +6,13 @@ function downloadCSV(rows) {
     window.open(encodedUri);
 }
 
-let sampleEle = document.querySelector(".sample");
+//let sampleEle = document.querySelector(".sample");
 
 let features = [["x","y"]]; //list the features name here
 document.body.addEventListener("mousemove", (event) => {
     let instantFeats = []; //the instantaneous features arraylist
 
-    /*PUT FEATURES TO BE OBTAINED HERE*/
+    //PUT FEATURES TO BE OBTAINED HERE
     instantFeats.push(event.x); //get x coordinate
     instantFeats.push(event.y); //get y coordinate
 
