@@ -3,37 +3,63 @@ from functools import partial
 
 
 class login:
-
     window = Tk()
 
     @staticmethod
-    def validateLogin(username, password):
-        print("Username entered :", username.get())
-        print("Password entered :", password.get())
-        if username.get() == "waiz" and password.get() == "1234":
+    def toggle_fullscreen():
+        window = login.window
+        window.attributes("-fullscreen", True)
+        return "break"
+
+    @staticmethod
+    def validate():
+        print("Username entered :", username_verify.get())
+        print("Password entered :", password_verify.get())
+
+        if username_verify.get() == "waiz" and password_verify.get() == "1234":
+            login.login_success()
             print("success")
-            login.window.destroy()
+        else:
+            username_login_entry.delete(0, END)
+            password_login_entry.delete(0, END)
+
         return
 
     @staticmethod
+    def login_success():
+        global login_success_screen  # make login_success_screen global
+        login_success_screen = Toplevel(login.window)
+        login_success_screen.title("Success")
+        login_success_screen.geometry("150x100")
+        Label(login_success_screen, text="Login Success").pack()
+
+        # create OK button
+        Button(login_success_screen, text="OK", command=login.window.destroy).pack()
+
+    @staticmethod
     def run():
+        global username_verify, password_verify, username_login_entry, password_login_entry
         # window
-        login.window.geometry('400x150')
-        login.window.title('Login')
+        login_screen = login.window
+        login.toggle_fullscreen()
 
-        # username label and text entry box
-        Label(login.window, text="User Name").grid(row=0, column=0)
-        username = StringVar()
-        Entry(login.window, textvariable=username).grid(row=0, column=1)
+        login_screen.title("Login")
+        login_screen.geometry("300x250")
+        Label(login_screen, text="Please enter details below to login",
+              borderwidth=login_screen.winfo_screenwidth() // 10).pack()
+        Label(login_screen, text="").pack()
 
-        # password label and password entry box
-        Label(login.window, text="Password").grid(row=1, column=0)
-        password = StringVar()
-        Entry(login.window, textvariable=password, show='◉').grid(row=1, column=1)
+        username_verify = StringVar()
+        password_verify = StringVar()
 
-        validateLogin = partial(login.validateLogin, username, password)
+        Label(login_screen, text="Username ").pack()
+        username_login_entry = Entry(login_screen, textvariable=username_verify)
+        username_login_entry.pack()
+        Label(login_screen, text="").pack()
+        Label(login_screen, text="Password ").pack()
+        password_login_entry = Entry(login_screen, textvariable=password_verify, show='*')
+        password_login_entry.pack()
+        Label(login_screen, text="").pack()
+        Button(login_screen, text="Login", width=10, height=1, command=login.validate).pack()
 
-        # login button
-        Button(login.window, text="Login", command=validateLogin).grid(row=4, column=3)
-
-        login.window.mainloop()
+        login_screen.mainloop()
