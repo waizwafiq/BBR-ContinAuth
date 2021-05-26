@@ -20,20 +20,40 @@
             <label for="name"><b>Name</b></label>
             <input type="text" placeholder="Enter Name (Just like in your ID Card)" name="name" id="name" required>
             <br>
+
+            <label for="phone"><b>Phone Number</b></label>
+            <input type="text" placeholder="Enter Phone Number" name="phone" id="phone" required>
+            <br>
+
             <label for="email"><b>Email</b></label>
             <input type="email" placeholder="Enter Email" name="email" id="email" required>
             <br>
+
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
             <br>
+
             <label for="psw-repeat"><b>Confirm Password</b></label>
             <input type="password" placeholder="Confirm Password" name="psw-repeat" id="psw-repeat" required>
             <br>
-            <label for="ans1"><b>Why do you want to join this company? (Minimum 100 words)</b></label>
+
+            <label for="ans1"><b>Why do you want to join this company?</b></label>
+            <label>
+                (
+                <span id="show1">0</span>
+                of 150 words )
+            </label>
             <textarea id="ans1" name="ans1" placeholder="Write something.." style="height:200px"></textarea>
             <br>
-            <label for="ans2"><b>How can you contribute to this company? (Minimum 150 words)</b></label>
+
+            <label for="ans2"><b>How can you contribute to this company?</b></label>
+            <label>
+                (
+                <span id="show2">0</span>
+                of 150 words )
+            </label>
             <textarea id="ans2" name="ans2" placeholder="Write something.." style="height:200px"></textarea>
+            <script src="wordcount.js"></script>
 
             <hr>
             <br>
