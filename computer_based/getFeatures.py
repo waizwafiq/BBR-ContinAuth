@@ -15,7 +15,8 @@ features = {
     'v': [],
     'a': [],
     'j': [],
-    'w': []
+    'w': [],
+    'straightness': []
 }
 
 
@@ -27,6 +28,7 @@ def run(time_interval=0.01, stopTime=5):
     '''INITIALIZE VARIABLES'''
     pos = pag.position()
     x_i, y_i = pos[0], screensize[1] - pos[1]  # get initial coordinates
+    x_o, y_o = x_i, y_i
 
     t, t_p = 0 - time_interval, time_interval  # (0 - time_interval) to get the initial data features (t=0)
     s_euclid = 0  # cumulative s_euclid
@@ -89,6 +91,12 @@ def run(time_interval=0.01, stopTime=5):
             # Angular velocity
             w = d_theta / dt
 
+            '''DERIVED FEATURES'''
+            if s_euclid != 0:
+                straightness = (((x_o - x_f) ** 2 + (y_o - y_f) ** 2) ** 0.5) / s_euclid
+            else:
+                straightness = 1
+
             '''ADDING INTO FEATURES DICTIONARY'''
             features['t'].append(t)
             features['x'].append(x_f)
@@ -103,6 +111,7 @@ def run(time_interval=0.01, stopTime=5):
             features['a'].append(a_t)
             features['j'].append(j_t)
             features['w'].append(w)
+            features['straightness'].append(straightness)
 
         t_p = timeit.default_timer() - start_tp  # end processing time
 
