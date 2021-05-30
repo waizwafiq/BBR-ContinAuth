@@ -5,6 +5,6 @@ import pandas as pd
 features = getFeatures.run(0.01, 3)  # record for 3 seconds with 0.01s interval
 
 feat_df = pd.DataFrame(features)
-print(feat_df.head(10))
+print(feat_df)
 
-feat_df.to_csv('test.csv')  # save data into CSV
+feat_df.to_csv('dataset.csv', index=False)  # save data into CSV
