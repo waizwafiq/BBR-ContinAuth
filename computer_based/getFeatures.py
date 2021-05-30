@@ -3,20 +3,25 @@ import time, timeit
 import ctypes, math
 
 features = {
-    't': [],
-    'x': [],
-    'y': [],
-    's_euclid_c': [],
-    'theta': [],
-    'c': [],
-    'c_roc': [],
-    'v_x': [],
-    'v_y': [],
-    'v': [],
-    'a': [],
-    'j': [],
-    'w': [],
-    'straightness': []
+    't': [],  # time
+    'ttc': [],  # time to click
+    'paused_time': [],  # paused time
+    'paused_time_ratio': [],  # paused time ratio
+    'x': [],  # x-coordinate
+    'y': [],  # y-coordinate
+    's_euclid_c': [],  # cumulative euclidean distance
+    'theta': [],  # tangential angle from x-axis
+    'c': [],  # curvature
+    'c_roc': [],  # rate of change of curvature
+    'v_x': [],  # horizontal velocity
+    'v_y': [],  # vertical velocity
+    'v': [],  # resultant velocity
+    'a': [],  # resultant acceleration
+    'j': [],  # resultant jerk
+    'w': [],  # angular velocity
+    'straightness': [],
+    'jitter': [],
+    'pauses': []
 }
 
 
@@ -30,17 +35,20 @@ def run(time_interval=0.01, stopTime=5):
     x_i, y_i = pos[0], screensize[1] - pos[1]  # get initial coordinates
     x_o, y_o = x_i, y_i
 
-    t, t_p = 0 - time_interval, time_interval  # (0 - time_interval) to get the initial data features (t=0)
+    t, t_p, t_o = 0 - time_interval, time_interval, 0  # (0 - time_interval) to get the initial data features (t=0)
     s_euclid = 0  # cumulative s_euclid
     theta_i = 0  # initial angle of the path, tangent with the x-axis
     v_i = 0  # initial velocity
     a_i = 0  # initial acceleration
     c_i = 0  # initial curvature
+    pauses = 0  # initial pauses
+    paused_time = 0  # initial paused time
+    paused_time_ratio = 0
     while (t // 1) < stopTime:
         '''TIME'''
         t_i = t
         start_tp = timeit.default_timer()  # start processing time, t_p(0)
-        time.sleep(time_interval)  # pause for (time_interval) seconds
+        time.sleep(time_interval * 1)  # pause for (time_interval) seconds
         t += t_p  # t_f = t_i + t_p
         dt = t - t_i
 
@@ -92,13 +100,30 @@ def run(time_interval=0.01, stopTime=5):
             w = d_theta / dt
 
             '''DERIVED FEATURES'''
+            # Straightness
             if s_euclid != 0:
                 straightness = (((x_o - x_f) ** 2 + (y_o - y_f) ** 2) ** 0.5) / s_euclid
             else:
                 straightness = 1
+            # Jitter
+            if s_euclid != ds_euclid:
+                jitter = s_euclid / (s_euclid - ds_euclid)  # jitter = s_i/s_(i-1)
+            else:
+                jitter = 0
+            # Number of pauses
+            ttc = t - t_o
+            t_o = t
+            if ttc > dt:
+                pauses += 1
+                paused_time += ttc
+            elif t != 0:
+                paused_time_ratio = paused_time / t
 
             '''ADDING INTO FEATURES DICTIONARY'''
             features['t'].append(t)
+            features['ttc'].append(ttc)
+            features['paused_time'].append(paused_time)
+            features['paused_time_ratio'].append(paused_time_ratio)
             features['x'].append(x_f)
             features['y'].append(y_f)
             features['s_euclid_c'].append(s_euclid)
@@ -112,6 +137,9 @@ def run(time_interval=0.01, stopTime=5):
             features['j'].append(j_t)
             features['w'].append(w)
             features['straightness'].append(straightness)
+            features['jitter'].append(jitter)
+            features['pauses'].append(pauses)
+            # features['n_critical'].append(n_critical)
 
         t_p = timeit.default_timer() - start_tp  # end processing time
 
