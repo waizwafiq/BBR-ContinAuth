@@ -8,7 +8,10 @@ features = {
     'paused_time': [],  # paused time (cumulative of ttc)
     'paused_time_ratio': [],  # paused time ratio
     'x': [],  # x-coordinate
+    'dx': [],  # change in x-coord
     'y': [],  # y-coordinate
+    'dy': [],  # change in y-coord
+    'ds': [],  # change in euclidean distance
     's_euclid_c': [],  # cumulative euclidean distance
     'theta': [],  # tangential angle from x-axis
     'c': [],  # curvature
@@ -125,7 +128,10 @@ def run(time_interval=0.01, stopTime=5):
             features['paused_time'].append(paused_time)
             features['paused_time_ratio'].append(paused_time_ratio)
             features['x'].append(x_f)
+            features['dx'].append(dx)
             features['y'].append(y_f)
+            features['dy'].append(dy)
+            features['ds'].append(ds_euclid)
             features['s_euclid_c'].append(s_euclid)
             features['theta'].append(theta)
             features['c'].append(c)
