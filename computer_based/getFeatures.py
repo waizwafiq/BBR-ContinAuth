@@ -4,8 +4,8 @@ import ctypes, math
 
 features = {
     't': [],  # time
-    'ttc': [],  # time to click
-    'paused_time': [],  # paused time
+    'ttc': [],  # time to collect
+    'paused_time': [],  # paused time (cumulative of ttc)
     'paused_time_ratio': [],  # paused time ratio
     'x': [],  # x-coordinate
     'y': [],  # y-coordinate
